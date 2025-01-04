@@ -5,12 +5,14 @@ import 'package:bookly/core/Utils/app_routs.dart';
 import 'package:bookly/core/Utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
-  runApp(const BooklyApp());
+  await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
-  await Hive.openBox(kFeatchBooks);
+  await Hive.openBox<BookEntity>(kFeatchBooks);
+  await Hive.openBox<BookEntity>(kNewesBooks);
+  runApp(const BooklyApp());
 }
 
 class BooklyApp extends StatelessWidget {
