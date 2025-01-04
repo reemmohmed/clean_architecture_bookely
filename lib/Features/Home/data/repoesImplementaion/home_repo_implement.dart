@@ -4,6 +4,7 @@ import 'package:bookly/Features/Home/data/data_soures/home_local_data_soure.dart
 import 'package:bookly/Features/Home/data/data_soures/home_remote_data_sourse.dart';
 import 'package:bookly/core/Error/failers.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class HomeRepoImplement extends HomeRepo {
   final HomeRemoteDataSourse homeRemoteDataSourse;
@@ -23,7 +24,10 @@ class HomeRepoImplement extends HomeRepo {
       books = await homeRemoteDataSourse.featchNewBooks();
       return right(books);
     } catch (e) {
-      return left(Failers());
+      if (e is DioException) {
+        return left(ServerFailers.fromDioError(e));
+      }
+      return left(ServerFailers(e.toString()));
     }
   }
 
@@ -38,7 +42,10 @@ class HomeRepoImplement extends HomeRepo {
       books = await homeRemoteDataSourse.fetchFeatuersBooks();
       return right(books);
     } catch (e) {
-      return left(Failers());
+      if (e is DioException) {
+        return left(ServerFailers.fromDioError(e));
+      }
+      return left(ServerFailers(e.toString()));
     }
   }
 }
