@@ -39,14 +39,11 @@ class ServerFailers extends Failers {
   }
   factory ServerFailers.fromRespons(int statusCode, dynamic response) {
     if (statusCode == 400) {
-      return ServerFailers(
-          'Bad Request: The server could not understand the request. Please check your input.');
+      return ServerFailers(response['error']['message']);
     } else if (statusCode == 401) {
-      return ServerFailers(
-          'Unauthorized: Access is denied due to invalid credentials. Please login again.');
+      return ServerFailers(response['error']['message']);
     } else if (statusCode == 403) {
-      return ServerFailers(
-          'Forbidden: You do not have permission to access this resource.');
+      return ServerFailers(response['error']['message']);
     } else if (statusCode == 404) {
       return ServerFailers(
           'Not Found: The requested resource could not be found on the server.');
