@@ -4,10 +4,10 @@ import 'package:bookly/core/Error/failers.dart';
 import 'package:bookly/core/UserCase/user_case.dart';
 import 'package:dartz/dartz.dart';
 
-class FeatchNewsBooks extends UserCase<List<BookEntity>, NoPrame> {
+class FeatchNewsBooksCase extends UserCase<List<BookEntity>, NoPrame> {
   final HomeRepo homeRepo;
 
-  FeatchNewsBooks(this.homeRepo);
+  FeatchNewsBooksCase(this.homeRepo);
   @override
   Future<Either<Failers, List<BookEntity>>> call([NoPrame? param]) async {
     return await homeRepo.featchNewBooks();
