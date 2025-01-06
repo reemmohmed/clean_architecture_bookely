@@ -27,7 +27,7 @@ class ServerFailers extends Failers {
             'Bad certificate error. There may be an issue with the SSL certificate.');
       case DioExceptionType.badResponse:
         return ServerFailers.fromRespons(
-            e.response!.statusCode!, e.response!.data!);
+            e.response!.statusCode!, e.response!.data);
       case DioExceptionType.cancel:
         return ServerFailers('Request was cancelled. Please try again.');
       case DioExceptionType.connectionError:
@@ -37,12 +37,8 @@ class ServerFailers extends Failers {
         return ServerFailers('ther was an error , pleasetry a gain');
     }
   }
-  factory ServerFailers.fromRespons(int statusCode, dynamic response) {
-    if (statusCode == 400) {
-      return ServerFailers(response['error']['message']);
-    } else if (statusCode == 401) {
-      return ServerFailers(response['error']['message']);
-    } else if (statusCode == 403) {
+  factory ServerFailers.fromRespons(int? statusCode, dynamic response) {
+    if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
       return ServerFailers(response['error']['message']);
     } else if (statusCode == 404) {
       return ServerFailers(
@@ -55,7 +51,8 @@ class ServerFailers extends Failers {
           'Service Unavailable: The server is temporarily unavailable. Please try again later.');
     } else {
       return ServerFailers(
-          'Unexpected Error: An unexpected error occurred. Status code: $statusCode');
+          'Unexpected Error: An unexpected error occurred. Status code:$statusCode');
+      // 'Unexpected Error: An unexpected error occurred. Status code: $statusCode');
     }
   }
 }

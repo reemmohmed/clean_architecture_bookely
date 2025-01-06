@@ -8,6 +8,7 @@ import 'package:bookly/Features/Splash/Presentaton/Views/Widgets/constant.dart';
 import 'package:bookly/core/Utils/Functions/Setup_servers.dart';
 import 'package:bookly/core/Utils/app_routs.dart';
 import 'package:bookly/core/Utils/constant.dart';
+import 'package:bookly/core/Utils/simple_bloc_opservers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +20,7 @@ void main() async {
   await Hive.openBox<BookEntity>(kFeatchBooks);
   await Hive.openBox<BookEntity>(kNewesBooks);
   setUpServerLocator();
+  Bloc.observer = SimpleBlocOpservers();
   runApp(const BooklyApp());
 }
 
@@ -31,10 +33,8 @@ class BooklyApp extends StatelessWidget {
       providers: [
         BlocProvider<FetuersBooksCubit>(
           create: (context) => FetuersBooksCubit(
-            FetchFeatuersBooksCas(
-              getIt.get<HomeRepoImplement>(),
-            ),
-          ),
+            FetchFeatuersBooksCas(getIt.get<HomeRepoImplement>()),
+          )..feachFeachedBooks(),
         ),
         BlocProvider<FetchNewsBooksCubit>(
           create: (context) => FetchNewsBooksCubit(

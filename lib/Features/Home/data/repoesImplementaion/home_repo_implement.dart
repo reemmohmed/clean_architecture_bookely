@@ -15,8 +15,8 @@ class HomeRepoImplement extends HomeRepo {
 
   @override
   Future<Either<Failers, List<BookEntity>>> featchNewBooks() async {
+    List<BookEntity> books;
     try {
-      List<BookEntity> books;
       books = homeLocalDataSoure.featchNewsBooks();
       if (books.isNotEmpty) {
         return right(books);
@@ -33,8 +33,8 @@ class HomeRepoImplement extends HomeRepo {
 
   @override
   Future<Either<Failers, List<BookEntity>>> fetchFeatuersBooks() async {
+    List<BookEntity> books;
     try {
-      List<BookEntity> books;
       books = homeLocalDataSoure.fetchFeatuersBooks();
       if (books.isNotEmpty) {
         return right(books);
