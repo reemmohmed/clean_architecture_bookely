@@ -36,7 +36,9 @@ class HomeRepoImplement extends HomeRepo {
       {int pageNumber = 0}) async {
     List<BookEntity> books;
     try {
-      books = homeLocalDataSoure.fetchFeatuersBooks();
+      books = homeLocalDataSoure.fetchFeatuersBooks(
+        pageNumber: pageNumber,
+      );
       if (books.isNotEmpty) {
         return right(books);
       }
