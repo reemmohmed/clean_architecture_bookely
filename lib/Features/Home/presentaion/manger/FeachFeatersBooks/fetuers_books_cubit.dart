@@ -9,9 +9,9 @@ class FetuersBooksCubit extends Cubit<FetuersBooksState> {
   FetuersBooksCubit(this.fetchFeatuersBooksCas) : super(FetuersBooksInitial());
   final FetchFeatuersBooksCas fetchFeatuersBooksCas;
 
-  Future<void> feachFeachedBooks() async {
+  Future<void> feachFeachedBooks({int pageNumber = 0}) async {
     emit(FetuersBooksLoding());
-    var result = await fetchFeatuersBooksCas.call();
+    var result = await fetchFeatuersBooksCas.call(pageNumber);
     result.fold((failers) {
       emit(FetuersBooksFailers(failers.erroeMessage));
     }, (books) {

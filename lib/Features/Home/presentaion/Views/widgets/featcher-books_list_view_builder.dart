@@ -19,7 +19,7 @@ class FeatuterBooksListViewsBuilder extends StatelessWidget {
         } else if (state is FetuersBooksFailers) {
           return Text(state.erroeMessage);
         } else {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );

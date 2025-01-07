@@ -6,7 +6,7 @@ import 'package:bookly/core/Utils/constant.dart';
 import 'package:hive/hive.dart';
 
 abstract class HomeRemoteDataSourse {
-  Future<List<BookEntity>> fetchFeatuersBooks();
+  Future<List<BookEntity>> fetchFeatuersBooks({int pageNumber = 0});
   Future<List<BookEntity>> featchNewBooks();
 }
 
@@ -15,7 +15,7 @@ class HomeremoteDataSourseImpemen extends HomeRemoteDataSourse {
 
   HomeremoteDataSourseImpemen(this.apiServers);
   @override
-  Future<List<BookEntity>> fetchFeatuersBooks() async {
+  Future<List<BookEntity>> fetchFeatuersBooks({int pageNumber = 0}) async {
     var data = await apiServers.get(
         endpoint: 'volumes?q=programing&Filtering=free_books');
     List<BookEntity> books = getBooksMap(data);
@@ -24,9 +24,10 @@ class HomeremoteDataSourseImpemen extends HomeRemoteDataSourse {
   }
 
   @override
-  Future<List<BookEntity>> featchNewBooks() async {
+  Future<List<BookEntity>> featchNewBooks({int pageNumber = 0}) async {
     var data = await apiServers.get(
-        endpoint: 'volumes?q=programing&Filtering=free_books&Sorting=newest');
+        endpoint:
+            'volumes?pajenation=&q=programing&Filtering=free_books&Sorting=newest&maxResults=${pageNumber * 10}');
     List<BookEntity> books = getBooksMap(data);
     SaveBooksData(books, kNewesBooks);
     return books;

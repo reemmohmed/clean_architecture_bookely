@@ -32,7 +32,8 @@ class HomeRepoImplement extends HomeRepo {
   }
 
   @override
-  Future<Either<Failers, List<BookEntity>>> fetchFeatuersBooks() async {
+  Future<Either<Failers, List<BookEntity>>> fetchFeatuersBooks(
+      {int pageNumber = 0}) async {
     List<BookEntity> books;
     try {
       books = homeLocalDataSoure.fetchFeatuersBooks();
