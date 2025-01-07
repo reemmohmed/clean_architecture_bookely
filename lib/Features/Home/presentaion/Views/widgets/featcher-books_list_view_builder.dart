@@ -13,7 +13,9 @@ class FeatuterBooksListViewsBuilder extends StatelessWidget {
     return BlocBuilder<FetuersBooksCubit, FetuersBooksState>(
       builder: (context, state) {
         if (state is FetuersBooksScusess) {
-          return const FeatureBooksListViews();
+          return FeatureBooksListViews(
+            books: state.books,
+          );
         } else if (state is FetuersBooksFailers) {
           return Text(state.erroeMessage);
         } else {
