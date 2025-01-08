@@ -20,7 +20,7 @@ class HomeViewBody extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: CustomAppBAR(),
               ),
-              FeatuterBooksListViewsBuilder(),
+              FeatuterBooksListViewsCunsumer(),
               SizedBox(
                 height: 30,
               ),
